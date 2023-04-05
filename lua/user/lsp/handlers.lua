@@ -60,6 +60,7 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+	keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.execute_command({command = \"_typescript.organizeImports\", arguments = {vim.fn.expand(\"%:p\")}})<CR>", opts)
 	keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
 	keymap(bufnr, "n", "<leader>lI", "<cmd>Mason<cr>", opts)
 	keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
@@ -71,9 +72,17 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-	if client.name == "tsserver" then
+  local root = vim.fn.finddir('.git/..', vim.fn.expand('%:p:h')..';')
+  -- print(root)
+	if client.name == "tsserver" and root ~= "/Users/subhash/Documents/work/highlevel/workflow" then
+    print("Not Using tsserver for formatting")
 		client.server_capabilities.documentFormattingProvider = false
-	end
+  else
+    print("Using tsserver for formatting")
+  end
+	-- if client.name == "tsserver" then
+	-- 	client.server_capabilities.documentFormattingProvider = false
+ --  end
 
 	if client.name == "sumneko_lua" then
 		client.server_capabilities.documentFormattingProvider = false
