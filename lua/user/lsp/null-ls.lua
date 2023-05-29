@@ -12,7 +12,9 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local should_not_eslint_for_diagonastic = function(matchFn)
   local not_have_eslint_configs = {
-    "/Users/subhash/Documents/work/highlevel/workflow-vue3$",
+    "/Users/subhash/Documents/work/highlevel/automation.workflow.frontend$",
+    "/Users/subhash/Documents/work/highlevel/spm-appengine$",
+    "/Users/subhash/Documents/work/highlevel/highlevel-functions$",
   }
 
   for _, dir in ipairs(not_have_eslint_configs) do
@@ -26,9 +28,9 @@ end
 
 local get_autoformat_extension_regex = function(root)
   local auto_format_dirs = {
-    { "/Users/subhash/Documents/work/highlevel/workflow$", "tsx" },
+    { "/Users/subhash/Documents/work/highlevel/automation.workflow.backend$", "tsx" },
     { "/Users/subhash/Documents/work/highlevel/marketplace.backend$", "tsx" },
-    { "/Users/subhash/Documents/work/highlevel/workflow.vue3$", "ts|vue" },
+    { "/Users/subhash/Documents/work/highlevel/automation.workflow.frontend$", "ts|vue" },
   }
 
   for _, dir in ipairs(auto_format_dirs) do
@@ -42,7 +44,7 @@ end
 local use_eslint_as_formatter = function(matchFn)
   -- avoid folder or file name with - char
   local root_list = {
-    "/Users/subhash/Documents/work/highlevel/workflow$",
+    "/Users/subhash/Documents/work/highlevel/automation.workflow.backend$",
     "/Users/subhash/Documents/work/highlevel/marketplace.backend$",
   }
   for _, dir in ipairs(root_list) do
@@ -78,19 +80,20 @@ null_ls.setup {
     diagnostics.flake8,
     diagnostics.eslint_d.with {
       condition = function(utils)
-        return should_not_eslint_for_diagonastic(utils.root_matches)
+        return not should_not_eslint_for_diagonastic(utils.root_matches)
       end,
     },
   },
 
   on_attach = function(client, bufnr)
-    local current_dir = client.workspaceFolders[1].name
+    local root_dir = client.config.root_dir;
+
     -- if current_dir == "/Users/subhash/Documents/work/highlevel/workflow" then
     --   require("null_ls.sources").disable("prettier")
     -- end
 
     -- print(bufnr)
-    local autoformat_extension = get_autoformat_extension_regex(current_dir)
+    local autoformat_extension = get_autoformat_extension_regex(root_dir)
     if autoformat_extension ~= nil then
       if client.supports_method "textDocument/formatting" then
         vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }

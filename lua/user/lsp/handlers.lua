@@ -10,6 +10,7 @@ lsp_status.register_progress()
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+-- M.capabilities = vim.tbl_extend('keep', M.capabilities or {}, lsp_status.capabilities)
 
 M.setup = function()
 	local signs = {
@@ -78,13 +79,18 @@ end
 
 M.on_attach = function(client, bufnr)
   local root = vim.fn.finddir('.git/..', vim.fn.expand('%:p:h')..';')
-  -- print(root)
-	if client.name == "tsserver" and root ~= "/Users/subhash/Documents/work/highlevel/workflow" then
+  print(root)
+	if client.name == "tsserver" and root ~= "/Users/subhash/Documents/work/highlevel/automation-workflow-backend" then
     print("Not Using tsserver for formatting")
 		client.server_capabilities.documentFormattingProvider = false
-  else
+  elseif client.name == "tsserver" then
     print("Using tsserver for formatting")
   end
+
+  if client.name == "volar" then
+		client.server_capabilities.documentFormattingProvider = false
+  end
+    
 	-- if client.name == "tsserver" then
 	-- 	client.server_capabilities.documentFormattingProvider = false
  --  end
