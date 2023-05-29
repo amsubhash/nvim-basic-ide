@@ -6,3 +6,5 @@ end
 require "user.lsp.mason"
 require("user.lsp.handlers").setup()
 require "user.lsp.null-ls"
+local lsp_status  = require('lsp-status')
+lsp_status.register_progress()

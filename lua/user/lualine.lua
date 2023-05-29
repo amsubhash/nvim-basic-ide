@@ -3,6 +3,8 @@ if not status_ok then
   return
 end
 
+local lsp_status = require('lsp-status')
+
 local hide_in_width = function()
   return vim.fn.winwidth(0) > 80
 end
@@ -37,6 +39,10 @@ local spaces = function()
   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
+local lsp_status_text = function()
+  return "lsp: " .. lsp_status.status()
+end
+
 lualine.setup {
   options = {
     globalstatus = true,
@@ -58,7 +64,7 @@ lualine.setup {
         path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
       },
     },
-    lualine_x = { diff, spaces, "encoding", filetype },
+    lualine_x = { diff, spaces, "encoding", filetype, lsp_status_text },
     lualine_y = { location },
     lualine_z = { "progress" },
   },

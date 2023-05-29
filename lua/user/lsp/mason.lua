@@ -7,6 +7,11 @@ local servers = {
 	"bashls",
 	"jsonls",
 	"yamlls",
+   "clangd",
+   "gopls",
+   "sqls",
+   "svelte",
+   "rust_analyzer",
 }
 
 local settings = {
