@@ -9,6 +9,12 @@ M.servers = {
   "bashls",
   "jsonls",
   "yamlls",
+  "volar",
+  "clangd",
+  "gopls",
+  "sqls",
+  "svelte",
+  "rust_analyzer",
 }
 
 return M

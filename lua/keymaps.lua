@@ -28,6 +28,20 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
+keymap("n", "<leader>rk", ":resize -10<CR>", opts)
+keymap("n", "<leader>rj", ":resize +10<CR>", opts)
+keymap("n", "<leader>rh", ":vertical resize -10<CR>", opts)
+keymap("n", "<leader>rl", ":vertical resize +10<CR>", opts)
+
+keymap('n', '<C-s>', ':w<cr>', opts)
+keymap('i', '<C-s>', '<Esc>:w<cr>', opts)
+
+-- Ctrl + q to quit that window
+keymap('n', '<C-q>', ':q<cr>', opts)
+
+-- Leader + s to quit that window
+-- keymap('n', '<Leader>s', ':%s/\v<<C-r><C-w>>/', opts)
+
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
@@ -43,7 +57,7 @@ keymap("v", "p", 'P', opts)
 
 -- Insert --
 -- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
+-- keymap("i", "jk", "<ESC>", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -63,6 +77,9 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
+keymap("n", "<leader>gh", "<cmd>Gitsigns preview_hunk<CR>", opts)
+keymap("n", "<leader>gj", "<cmd>Gitsigns next_hunk<CR>", opts)
+keymap("n", "<leader>gk", "<cmd>Gitsigns prev_hunk<CR>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
