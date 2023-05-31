@@ -13,6 +13,10 @@ local M = {
       event = "VeryLazy",
       commit = "0568104bf8d0c3ab16395433fcc5c1638efc25d4"
     },
+    -- {
+    --   "nvim-treesitter/nvim-treesitter-context",
+    --   event = "VeryLazy",
+    -- },
   },
 }
 function M.config()
