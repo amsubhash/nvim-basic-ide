@@ -41,4 +41,10 @@ vim.opt.shortmess:append "c"                    -- hide all the completion messa
 vim.opt.whichwrap:append "<,>,[,],h,l"          -- keys allowed to move to the previous/next line when the beginning/end of line is reached
 vim.opt.iskeyword:append "-"                    -- treats words with `-` as single words
 vim.opt.formatoptions:remove { "c", "r", "o" }  -- This is a sequence of letters which describes how automatic formatting is to be done
-vim.opt.linebreak = true
+-- For indentation
+vim.opt.foldmethod = 'indent'
+vim.opt.foldenable = false
+vim.opt.foldlevelstart = 99
+vim.opt.foldnestmax = 10
+vim.opt.foldlevel = 1
+-- For indentation End
