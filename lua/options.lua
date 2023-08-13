@@ -48,3 +48,6 @@ vim.opt.foldlevelstart = 99
 vim.opt.foldnestmax = 10
 vim.opt.foldlevel = 1
 -- For indentation End
+-- options for vim wiki
+
+require("user.vimwiki").setOption()

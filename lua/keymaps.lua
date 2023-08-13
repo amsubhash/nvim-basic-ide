@@ -21,7 +21,6 @@ keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
-
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
@@ -32,6 +31,11 @@ keymap("n", "<leader>rk", ":resize -10<CR>", opts)
 keymap("n", "<leader>rj", ":resize +10<CR>", opts)
 keymap("n", "<leader>rh", ":vertical resize -10<CR>", opts)
 keymap("n", "<leader>rl", ":vertical resize +10<CR>", opts)
+
+keymap("n", "<leader>rkk", ":resize -20<CR>", opts)
+keymap("n", "<leader>rjj", ":resize +20<CR>", opts)
+keymap("n", "<leader>rhh", ":vertical resize -20<CR>", opts)
+keymap("n", "<leader>rll", ":vertical resize +20<CR>", opts)
 
 keymap('n', '<C-s>', ':w<cr>', opts)
 keymap('i', '<C-s>', '<Esc>:w<cr>', opts)
@@ -47,7 +51,7 @@ keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- Clear highlights
-keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
+-- keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 
 -- Close buffers
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
