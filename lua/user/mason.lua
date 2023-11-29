@@ -3,6 +3,7 @@ local M = {
   commit = "4546dec8b56bc56bc1d81e717e4a935bc7cd6477",
   cmd = "Mason",
   event = "BufReadPre",
+  cond = not vim.g.vscode,
   dependencies = {
     {
       "williamboman/mason-lspconfig.nvim",
@@ -28,7 +29,7 @@ local settings = {
 function M.config()
   require("mason").setup(settings)
   require("mason-lspconfig").setup {
-    ensure_installed = require("utils").servers,
+    -- ensure_installed = require("utils").servers,
     automatic_installation = false,
   }
 end

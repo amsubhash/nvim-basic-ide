@@ -1,6 +1,7 @@
 local M = {
   'mxsdev/nvim-dap-vscode-js',
   event = "VeryLazy",
+  cond = not vim.g.vscode,
   dependencies = {
     {
       "microsoft/vscode-js-debug",

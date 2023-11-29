@@ -2,6 +2,7 @@ local M = {
   "neovim/nvim-lspconfig",
   commit = "649137cbc53a044bffde36294ce3160cb18f32c7",
   lazy = true,
+  cond = not vim.g.vscode,
   dependencies = {
     {
       "hrsh7th/cmp-nvim-lsp",

@@ -1,6 +1,7 @@
 local M = {
   "kyazdani42/nvim-tree.lua",
   commit = "59e65d88db177ad1e6a8cffaafd4738420ad20b6",
+  cond = not vim.g.vscode,
   event = "VimEnter"
 }
 
@@ -49,7 +50,11 @@ function M.config()
       },
     },
     view = {
-      width = 50,
+      width = {
+        min = 50,
+        max = 100,
+      },
+      adaptive_size = true,
       side = "left",
       mappings = {
         list = {

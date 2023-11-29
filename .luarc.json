@@ -1,0 +1,12 @@
+{
+    "workspace.library": [
+        "/Users/subhash/.local/share/nvim/lazy/neodev.nvim/types/stable",
+        "/opt/homebrew/Cellar/neovim/0.9.1/share/nvim/runtime/lua",
+        "/Users/subhash/Documents/work/personal/nvim-basic-ide/lua",
+        "/Users/subhash/.local/share/nvim/mason/packages/lua-language-server/extension/server/meta/28d77aab",
+        "${3rd}/luv/library",
+        "${3rd}/luv/library",
+        "${3rd}/luv/library",
+        "${3rd}/luv/library"
+    ]
+}

@@ -2,6 +2,7 @@ local M = {
   "mfussenegger/nvim-dap",
   commit = "6b12294a57001d994022df8acbe2ef7327d30587",
   event = "VeryLazy",
+  cond = not vim.g.vscode,
 }
 
 function M.config()

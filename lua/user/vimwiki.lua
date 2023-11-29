@@ -1,6 +1,7 @@
 local M = {
   "vimwiki/vimwiki",
   event = "VimEnter",
+  cond = false,
 }
 
 function M.setOption()
