@@ -16,8 +16,8 @@ vim.g.mapleader = " "
 --   command_mode = "c",
 
 -- Normal --
--- yanking 
-keymap("n", "<leader>yp", ":let @+ = expand(\"%:p\")<CR>")
+-- yanking
+keymap("n", "<leader>yp", ':let @+ = expand("%:p")<CR>')
 
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -40,11 +40,11 @@ keymap("n", "<leader>rjj", ":resize +20<CR>", opts)
 keymap("n", "<leader>rhh", ":vertical resize -20<CR>", opts)
 keymap("n", "<leader>rll", ":vertical resize +20<CR>", opts)
 
-keymap('n', '<C-s>', ':w<cr>', opts)
-keymap('i', '<C-s>', '<Esc>:w<cr>', opts)
+keymap("n", "<C-s>", ":w<cr>", opts)
+keymap("i", "<C-s>", "<Esc>:w<cr>", opts)
 
 -- Ctrl + q to quit that window
-keymap('n', '<C-q>', ':q<cr>', opts)
+keymap("n", "<C-q>", ":q<cr>", opts)
 
 -- Leader + s to quit that window
 -- keymap('n', '<Leader>s', ':%s/\v<<C-r><C-w>>/', opts)
@@ -60,7 +60,7 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
 -- Better paste
-keymap("v", "p", 'P', opts)
+keymap("v", "p", "P", opts)
 
 -- Insert --
 -- Press jk fast to enter
@@ -88,7 +88,12 @@ keymap("n", "<leader>gh", "<cmd>Gitsigns preview_hunk<CR>", opts)
 keymap("n", "<leader>gj", "<cmd>Gitsigns next_hunk<CR>", opts)
 keymap("n", "<leader>gk", "<cmd>Gitsigns prev_hunk<CR>", opts)
 keymap("n", "<leader>gb", "<cmd>Gitsigns blame_line<CR>", opts)
-keymap("n", "<leader>gff", "<cmd>execute'!git log -p -- \"%:p\" > /tmp/nvim-file-git-log.git' | e /tmp/nvim-file-git-log.git<CR><CR>", opts)
+keymap(
+  "n",
+  "<leader>gff",
+  "<cmd>execute'!git log -p -- \"%:p\" > /tmp/nvim-file-git-log.git' | e /tmp/nvim-file-git-log.git<CR><CR>",
+  opts
+)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
@@ -105,5 +110,24 @@ keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
 keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
+function excapeSearchText(searchText) 
+  return string.gsub(searchText, "([/%]])", "\\%1")
+end
+
+function searchVisualSelection()
+  local mode = vim.fn.mode()
+
+  if (mode == 'v' or mode == 'V') then
+    vim.cmd('normal "sy');
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+    local selectionText = excapeSearchText(vim.fn.getreg('s'))
+    vim.api.nvim_feedkeys(":%s/" .. selectionText, 'n', true)
+  end
+
+end
+keymap("v", "<leader>s", "<cmd>lua searchVisualSelection()<CR>")
+
+keymap("n", "<leader>s", ":%s/<C-r><C-w>");
+-- vim.keymap.set('v', '<leader>s', ":%s/\"fy/\\V<C-R>f<CR>" )
 -- Lsp
 keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
